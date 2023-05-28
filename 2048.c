@@ -5,14 +5,14 @@
 
 int box[size][size];
 
-void initialize(){
+void initialize(){//初始化版面
     for(int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
             box[i][j] = 0;
         }
     }
 }
-void tutorials(){
+void tutorials(){//印出教學
     printf("==============================");
     printf("\nWelcome to 2048 arcade!!!");
     printf("\nenter 'wasd' to move the board");
@@ -22,7 +22,7 @@ void tutorials(){
     printf("\n'd'stands for moving rightward");
     printf("\n==============================\n");
 }
-void print_box(){
+void print_box(){//印出當前版面
     printf("----- ---- ---- -----\n");
     
     for(int i = 0; i < size; i++){
@@ -34,7 +34,7 @@ void print_box(){
     }
 }
 void merge_boxes(int a, int b, int c, int d){
-//原本打算把相加部分併在移動部分
+//原本打算把合併部分併在移動部分
 //後來發現太過冗長, 拆分至另一個副程式
     box[c][d] += box[a][b];
     box[a][b] = 0;
@@ -69,7 +69,7 @@ void move_down(){//向下移動
                     box[temp][j] = 0;
                     temp++;
                 }
-                if (temp < size - 1 && box[temp+1][j] == box[temp][j]){
+                if (temp < size - 1 && box[temp+1][j] == box[temp][j]){//如果
                     merge_boxes(temp, j, temp+1, j);
                 }
             }
@@ -96,8 +96,7 @@ void move_left(){//向左移動
     }
 }
 
-void move_right()
-{
+void move_right(){//向右移動
     int i, j;
     for (i = 0; i < size; i++){
         for (j = size - 2; j >= 0; j--){
@@ -140,7 +139,7 @@ int full_check(){//檢查是否滿板
     }
     return 1;
 }
-int win_check(){
+int win_check(){//檢查是否獲勝
     for(int i = 0; i<size; i++){
         for(int j = 0; j < size; j++){
             if(box[i][j] == 2048){
@@ -162,7 +161,7 @@ int main(){
         print_box();
         printf("Enter your move (w/a/s/d): ");
         scanf(" %c", &move);
-        switch (move){
+        switch (move){//使用switch case判別行動
         case 'w':
             move_up();
             break;
@@ -179,6 +178,7 @@ int main(){
             printf("Invalid move. Try again.\n");
             continue;
         }
+        // 先檢查是否獲勝，再檢查是否滿版
         if(win_check()){
             printf("YOU WIN!!!");
             break;
@@ -187,7 +187,7 @@ int main(){
             printf("GAME OVER");
             break;
         }
-        generate_number();   
+        generate_number();//移動後再生成2或4   
     } 
     return 0;
 }
