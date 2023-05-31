@@ -160,7 +160,7 @@ int main(){
     while (1){
         print_box();
         printf("Enter your move (w/a/s/d): ");
-        scanf(" %c", &move);
+        scanf("%c", &move);
         switch (move){//使用switch case判別行動
         case 'w':
             move_up();
@@ -187,7 +187,8 @@ int main(){
             printf("GAME OVER");
             break;
         }
-        generate_number();//移動後再生成2或4   
+        generate_number();//移動後再生成2或4
+        fflush(stdin);//清空緩衝區   
     } 
     return 0;
 }
